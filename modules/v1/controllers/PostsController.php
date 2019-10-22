@@ -19,7 +19,7 @@ class PostsController extends BaseRestController
 //        var_dump($limit); exit();
         $query = new Query();
         $ret = $query->from('posts')->where(['citySlug'=>$cityId])->andFilterWhere(['userId' =>$userId])->offset($offset)->limit($limit)->all();
-        return $ret;
+        return ['posts' => $ret];
     }
 
     public function actionView($id)
@@ -30,7 +30,7 @@ class PostsController extends BaseRestController
         if(!$ret) {
             throw new RecordNotFoundException();
         }
-        return $ret;
+        return ['post' => $ret];
     }
 
     protected function verbs()
